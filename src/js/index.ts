@@ -11,7 +11,7 @@ interface IMusic {
 }
 
 
-let baseUrl: string = "http://musicservice.azurewebsites.net/api/Musics"
+let baseUrl: string = "https://musicservice.azurewebsites.net/api/Musics"
 //let baseUrl: string = "http://localhost:51068/api/Musics"
 
 new Vue({
