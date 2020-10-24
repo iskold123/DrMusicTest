@@ -29,6 +29,22 @@
     <button class="btn btn-primary"></button>
   </div>
 
+  <div>
+    <h2>Search for artist</h2>
+    <input type="text" v-model="InputId" placeholder="Type artist"> 
+    <button v-on:click="getArtistByInput()">Search</button>
+    {{ artist }}
+    <!-- <div v-if="artist">{{ artist }}</div>
+    <div v-else>Artist dont exist</div> -->
+    <!-- <h2>Book by id</h2>
+    <input v-model="id" placeholder="id" type="number">
+    <button v-on:click="getBookById(id)" class="btn btn-primary">Get Book</button>
+    <div v-if="book">{{ book }}</div>
+    <div v-else>No such book</div> -->
+  </div>
+
+
+
 
   <!-- <h3>Table (with Bootstrap decorations ....)</h3>
     <div class="container">

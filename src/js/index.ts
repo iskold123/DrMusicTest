@@ -10,7 +10,6 @@ interface IMusic {
     yearOfPublication: number
 }
 
-
 let baseUrl: string = "https://musicservice.azurewebsites.net/api/Musics"
 //let baseUrl: string = "http://localhost:51068/api/Musics"
 
@@ -21,7 +20,8 @@ new Vue({
     el: "#app",
     data: {
         records: [],
-        // id: "",
+        InputId: "",
+        artist: "",
         // music: null,
         // inputData: { title: "", artist: "", duration: "", yearOfPublication: 0 },
         // addMessage: "",
@@ -45,12 +45,12 @@ new Vue({
                     alert(error.message)
                 })
         },
-        getBookById(id: number): void {
-            let uri: string = baseUrl + "/" + id
-            console.log("getBookById: " + uri)
-            axios.get<IBook>(uri)
-                .then((response: AxiosResponse<IBook>) => {
-                    this.book = response.data
+        getArtistByInput(): void {
+            let uri: string = baseUrl + "/artist/" + this.InputId;
+            console.log("getArtistById: " + uri)
+            axios.get<IMusic>(uri)
+                .then((response: AxiosResponse<IMusic>) => {
+                    this.artist = response.data.artist
                 })
                 .catch((error: AxiosError) => {
                     alert(error.message)
