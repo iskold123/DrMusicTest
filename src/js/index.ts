@@ -10,7 +10,8 @@ interface IMusic {
     yearOfPublication: number
 }
 
-let baseUrl: string = "https://musicservice.azurewebsites.net/api/Musics"
+
+let baseUrl: string = "http://drmusic.azurewebsites.net/api/musics"
 //let baseUrl: string = "http://localhost:51068/api/Musics"
 
 new Vue({
@@ -20,8 +21,12 @@ new Vue({
     el: "#app",
     data: {
         records: [],
-        InputId: "",
-        artist: "",
+        record: null,
+        id:"",
+        artist: [],
+
+
+        // id: "",
         // music: null,
         // inputData: { title: "", artist: "", duration: "", yearOfPublication: 0 },
         // addMessage: "",
@@ -33,10 +38,10 @@ new Vue({
     },
     created(): void {
         console.log("created")
-        this.getAndShowAllrecords();
+        this.getAndShowAllRecords();
     },
     methods: {
-        getAndShowAllrecords(): void {
+        getAndShowAllRecords(): void {
             axios.get<IMusic[]>(baseUrl)
                 .then((response: AxiosResponse<IMusic[]>) => {
                     this.records = response.data
@@ -45,55 +50,55 @@ new Vue({
                     alert(error.message)
                 })
         },
-        getArtistByInput(): void {
-            let uri: string = baseUrl + "/artist/" + this.InputId;
-            console.log("getArtistById: " + uri)
+        getByArtist(id: number): void {
+            let uri: string = baseUrl + "/artist/" + id
+            console.log("getByArtist: " + uri)
             axios.get<IMusic>(uri)
                 .then((response: AxiosResponse<IMusic>) => {
-                    this.artist = response.data.artist
+                    this.artist = response.data
                 })
                 .catch((error: AxiosError) => {
                     alert(error.message)
                 })
         },
-        addBook(): void {
-            console.log("addBook")
+        addRecord(): void {
+            console.log("addRecord")
             axios.post<number>(baseUrl, this.inputData)
                 .then((response: AxiosResponse<number>) => {
-                    this.addMessage = "Book added"
-                    this.getAndShowAllBooks()
+                    this.addMessage = "Record added"
+                    this.getAndShowAllRecords()
                 })
                 .catch((error: AxiosError) => {
                     alert(error.message)
                 })
         },
-        deleteBookById(id: number): void {
+        deletePlanteById(id: number): void {
             let uri: string = baseUrl + "/" + id
-            console.log("deleteBookById " + uri)
+            console.log("deletePlanteById " + uri)
             axios.delete<number>(uri)
                 .then((response: AxiosResponse<number>) => {
-                    console.log("deleteBookById result " + response.data)
+                    console.log("deletePlanteById result " + response.data)
                     if (response.data == 1) {
-                        this.deleteMessage = "Book deleted"
-                        this.getAndShowAllBooks()
+                        this.deleteMessage = "Plante deleted"
+                        this.getAndShowAllPlante()
                     } else {
-                        this.deleteMessage = "No such book"
+                        this.deleteMessage = "No such plante"
                     }
                 })
                 .catch((error: AxiosError) => {
                     alert(error.message)
                 })
         },
-        updateBook(id: number): void {
+        updatePlante(id: number): void {
             let uri: string = baseUrl + "/" + id
-            console.log("update book " + uri)
+            console.log("update plante " + uri)
             axios.put<number>(uri, this.updateData)
                 .then((response: AxiosResponse<number>) => {
                     if (response.data == 1) {
-                        this.updateMessage = "Book updated"
+                        this.updateMessage = "Plante updated"
                         this.getAndShowAllBooks()
                     } else {
-                        this.updateMessage = "No such book"
+                        this.updateMessage = "No such plante"
                     }
                 })
                 .catch((error: AxiosError) => {

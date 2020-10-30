@@ -12,38 +12,30 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-  <title>DR Records</title>
+  <title>DR Musik</title>
 </head>
 
 <body>
-  <h1>Danmarks Rsadio Records</h1>
+  <h1>Dr musik </h1>
   <div id="app">
-    <h2>All Records</h2>
+    <h2>Alle sange</h2>
     <br />
+    <div>
+      <ul id = "id">
+        <li v-for="record in records">{{record.title}}, {{record.artist}}, {{record.duration}}
+          {{record.yearOfPublication}}</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Find et nummer fra en Artist</h2>
+      <input v-model="id" placeholder="id" type="string">
+      <button v-on:click="getByArtist(id)" class="btn btn-primary">søg</button>
+      <div v-if="artist">{{ artist }}</div>
+      <div v-else>ingen artist med dette navn</div>
+    </div>
 
-    <ul id="recordsId">
-      <li v-for="Record in records">{{Record.artist}}, {{Record.title}}, {{Record.duration}}
-        {{Record.yearOfPublication}}</li>
-    </ul>
-    
     <button class="btn btn-primary"></button>
   </div>
-
-  <div>
-    <h2>Search for artist</h2>
-    <input type="text" v-model="InputId" placeholder="Type artist"> 
-    <button v-on:click="getArtistByInput()">Search</button>
-    {{ artist }}
-    <!-- <div v-if="artist">{{ artist }}</div>
-    <div v-else>Artist dont exist</div> -->
-    <!-- <h2>Book by id</h2>
-    <input v-model="id" placeholder="id" type="number">
-    <button v-on:click="getBookById(id)" class="btn btn-primary">Get Book</button>
-    <div v-if="book">{{ book }}</div>
-    <div v-else>No such book</div> -->
-  </div>
-
-
 
 
   <!-- <h3>Table (with Bootstrap decorations ....)</h3>
